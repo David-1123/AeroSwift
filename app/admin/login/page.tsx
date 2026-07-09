@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { AdminLoginForm } from "@/components/AdminLoginForm";
+import { Logo } from "@/components/Logo";
 
 export const metadata = { title: "Administración · AeroSwift" };
 
@@ -7,9 +8,9 @@ export default function AdminLoginPage() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-onyx px-4">
       <div className="w-full max-w-sm">
-        <Link href="/" className="mb-8 block text-center">
-          <span className="font-display text-2xl font-bold text-white">AeroSwift</span>
-          <span className="mt-1 block text-xs uppercase tracking-[0.2em] text-gold">
+        <Link href="/" className="mb-8 flex flex-col items-center gap-2 text-center">
+          <Logo tone="onDark" />
+          <span className="text-xs uppercase tracking-[0.2em] text-gold">
             Control operacional
           </span>
         </Link>

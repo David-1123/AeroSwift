@@ -1,12 +1,13 @@
 import Link from "next/link";
+import { Logo } from "@/components/Logo";
 
 export function SiteFooter() {
   return (
     <footer className="border-t border-line/70 bg-onyx text-bone/80">
       <div className="mx-auto flex max-w-[1280px] flex-col gap-6 px-4 py-12 sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:px-10">
         <div>
-          <p className="font-display text-2xl font-bold text-white">AeroSwift</p>
-          <p className="mt-1 text-sm text-bone/60">
+          <Logo tone="onDark" />
+          <p className="mt-3 text-sm text-bone/60">
             Traslados privados premium en Quito · Quito, Ecuador
           </p>
         </div>
