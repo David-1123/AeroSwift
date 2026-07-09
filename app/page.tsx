@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
+import { CustomQuote } from "@/components/CustomQuote";
 import { BASE_FARE_USD, SUR_FARE_USD } from "@/lib/pricing";
 
 const services = [
@@ -114,6 +115,32 @@ export default function HomePage() {
               <p className="mt-2 text-sm text-ink-soft">{s.body}</p>
             </div>
           ))}
+        </div>
+      </section>
+
+      {/* Cotización personalizada (otros destinos / eventos / turismo) */}
+      <section id="otros-destinos" className="border-t border-line/70 bg-surface">
+        <div className="mx-auto max-w-[1280px] px-4 py-16 sm:px-6 lg:px-10">
+          <div className="grid gap-8 lg:grid-cols-[1fr_1.1fr] lg:items-center">
+            <div>
+              <p className="text-sm font-semibold uppercase tracking-[0.15em] text-gold">
+                Cotización personalizada
+              </p>
+              <h2 className="mt-2 font-display text-3xl font-bold text-onyx">
+                ¿Otro destino o servicio? Lo cotizamos a tu medida.
+              </h2>
+              <p className="mt-3 text-ink-soft">
+                Viajes a otras ciudades (Riobamba, Baños, Otavalo…), eventos, turismo o traslados
+                especiales. Cuéntanos a dónde vas y te enviamos un precio cerrado por WhatsApp.
+              </p>
+              <ul className="mt-5 space-y-2 text-sm text-ink-soft">
+                <li className="flex items-center gap-2"><Dot /> Precio a tu medida, sin sorpresas</li>
+                <li className="flex items-center gap-2"><Dot /> Sedán ejecutivo o vehículo según el grupo</li>
+                <li className="flex items-center gap-2"><Dot /> Respuesta rápida por WhatsApp</li>
+              </ul>
+            </div>
+            <CustomQuote />
+          </div>
         </div>
       </section>
 
