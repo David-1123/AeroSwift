@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AeroSwift - User Dashboard</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Playfair+Display:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Config -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "inverse-primary": "#c1c6d7",
+                    "on-secondary": "#ffffff",
+                    "tertiary-fixed": "#f5dfc4",
+                    "surface-white": "#FFFFFF",
+                    "on-tertiary": "#ffffff",
+                    "surface-variant": "#e7e2d9",
+                    "primary-fixed-dim": "#c1c6d7",
+                    "surface": "#fef9f0",
+                    "on-tertiary-container": "#96856d",
+                    "surface-dim": "#ded9d1",
+                    "tertiary-container": "#291e0d",
+                    "on-surface-variant": "#45474c",
+                    "primary-container": "#1a202c",
+                    "surface-container-low": "#f8f3ea",
+                    "status-pending": "#E2E8F0",
+                    "secondary-fixed": "#ffdeab",
+                    "on-error": "#ffffff",
+                    "surface-container-lowest": "#ffffff",
+                    "primary-fixed": "#dde2f3",
+                    "secondary": "#745a2d",
+                    "primary": "#030813",
+                    "inverse-on-surface": "#f5f0e7",
+                    "on-primary-fixed": "#161c27",
+                    "outline-variant": "#c6c6cc",
+                    "status-en-route": "#2D3748",
+                    "error-container": "#ffdad6",
+                    "on-primary-container": "#828796",
+                    "surface-tint": "#585e6c",
+                    "on-primary-fixed-variant": "#414754",
+                    "on-secondary-fixed-variant": "#5a4317",
+                    "surface-container": "#f2ede4",
+                    "on-secondary-container": "#795e30",
+                    "secondary-container": "#ffdaa1",
+                    "success": "#2F855A",
+                    "secondary-fixed-dim": "#e4c18a",
+                    "surface-bright": "#fef9f0",
+                    "on-error-container": "#93000a",
+                    "on-tertiary-fixed": "#241a09",
+                    "outline": "#76777c",
+                    "on-surface": "#1d1c16",
+                    "tertiary-fixed-dim": "#d8c3a9",
+                    "on-background": "#1d1c16",
+                    "inverse-surface": "#32302b",
+                    "tertiary": "#0e0700",
+                    "on-tertiary-fixed-variant": "#524531",
+                    "error": "#C53030",
+                    "on-secondary-fixed": "#271900",
+                    "on-primary": "#ffffff",
+                    "status-assigned": "#BD9D69",
+                    "warning": "#B7791F",
+                    "background": "#fef9f0",
+                    "surface-container-highest": "#e7e2d9",
+                    "surface-container-high": "#ece8df"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "table-cell-padding": "12px 16px",
+                    "container-max": "1280px",
+                    "gutter": "24px",
+                    "margin-mobile": "16px",
+                    "margin-desktop": "40px",
+                    "base": "8px"
+            },
+            "fontFamily": {
+                    "label-md": ["Inter"],
+                    "headline-md": ["Playfair Display"],
+                    "body-lg": ["Inter"],
+                    "headline-lg-mobile": ["Playfair Display"],
+                    "display-lg": ["Playfair Display"],
+                    "headline-lg": ["Playfair Display"],
+                    "body-sm": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "data-tabular": ["Inter"],
+                    "body-md": ["Inter"]
+            },
+            "fontSize": {
+                    "label-md": ["14px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "label-sm": ["12px", {"lineHeight": "14px", "fontWeight": "500"}],
+                    "data-tabular": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        body {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-surface text-on-surface min-h-screen font-body-md">
+<!-- TopAppBar -->
+<header class="bg-surface dark:bg-surface-dim border-b border-outline-variant/10 docked full-width top-0 flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop py-4 fixed z-40">
+<div class="text-headline-md font-headline-md text-primary dark:text-inverse-primary font-bold">AeroSwift</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary cursor-pointer active:scale-95 duration-150">language</span>
+<div class="w-8 h-8 rounded-full overflow-hidden border border-outline-variant/20 bg-surface-container">
+<img alt="Church in Quito" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBuENuVfAYvQQMTIdeEcUQggcMScgvsT6_YRiUodUM3Zu9x3JYwn-Psl19Bl-krjbsf-BqFWqTZ-aNDGgZ5FurzAk_EVdwJ5ds9mr6jCWIwtvV-2DZUY81frChxJPBecBNcKRLjAOoVNvCFgMEMkyGmwvTbjf41p4DNFSIDo0LLBeLLFeU3Si3nm3FxzM3zKN3Y2KG31COUSlPu0yi7A4EEzlzFf7KPgDzLmWf4Jv-FR39lW7NuJp8eUSodvrT47sLtCg"/>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="pt-[80px] pb-[90px] px-margin-mobile flex flex-col gap-8 max-w-container-max mx-auto">
+<!-- Welcome Message -->
+<div class="flex flex-col gap-1 mt-4">
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface">Good afternoon.</h1>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Here is your current itinerary.</p>
+</div>
+<!-- Active Reservations -->
+<section class="flex flex-col gap-4">
+<h2 class="font-label-md text-label-md text-on-surface-variant uppercase tracking-widest">Active Rides</h2>
+<!-- Card: Driver on the Way (Green/Success) -->
+<article class="bg-surface-white rounded-xl shadow-[0_4px_12px_rgba(0,0,0,0.03)] border border-outline-variant/10 p-5 flex flex-col gap-5 relative overflow-hidden">
+<!-- Status & Time -->
+<div class="flex justify-between items-start">
+<span class="bg-success text-white px-3 py-1.5 rounded-full font-label-sm text-label-sm flex items-center gap-1.5 shadow-sm">
+<span class="w-1.5 h-1.5 bg-white rounded-full animate-pulse"></span>
+                        Driver on the Way
+                    </span>
+<div class="flex flex-col items-end">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Pickup Time</span>
+<span class="font-data-tabular text-data-tabular text-primary font-semibold text-[16px]">Today, 14:30</span>
+</div>
+</div>
+<!-- Itinerary -->
+<div class="flex gap-4">
+<div class="flex flex-col items-center pt-1">
+<div class="w-3 h-3 rounded-full border-2 border-primary bg-surface-white z-10"></div>
+<div class="w-[2px] h-8 bg-outline-variant/30 my-1"></div>
+<span class="material-symbols-outlined text-primary text-[18px]">location_on</span>
+</div>
+<div class="flex flex-col gap-4 w-full">
+<div class="flex flex-col">
+<span class="font-body-md text-body-md text-on-surface font-medium">JFK Terminal 4</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Queens, NY 11430</span>
+</div>
+<div class="flex flex-col">
+<span class="font-body-md text-body-md text-on-surface font-medium">150 E 52nd St (HQ)</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">New York, NY 10022</span>
+</div>
+</div>
+</div>
+<hr class="border-outline-variant/15"/>
+<!-- Driver Details -->
+<div class="flex items-center gap-3 bg-surface-container-low p-3 rounded-lg border border-outline-variant/20">
+<div class="w-12 h-12 rounded-full overflow-hidden bg-surface-variant border border-outline-variant/10 flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="A professional male chauffeur wearing a crisp black suit, white shirt, and dark tie. He is smiling subtly, conveying trustworthiness and executive service. The background is a clean, neutral bright white." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAoC0zPcdUzSECwTv8rKVbFzuNrdJL3av-7qlJWo1TRHhIXf8ay-xIKDjaS5K8BF_PMdNsrSqz7qKxm5exx6gW4x8sEeGAMzazIZTZHP7t-zBcgsIXcEllihjaxp5BNdUMDuabQC2TAHPkYR5xH05YHNqC5MwR0MVbouEaM7tQWsVHTngMbatHhIW_P9SuC5v6mMFjZMN9uLkKrjgSQWyzkIe-d08qjMEPZNy7nxcFfLyzr91J1HxaO"/>
+</div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-primary">Juan Pérez</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Mercedes S-Class • Plate PBC-1234</span>
+</div>
+<button class="ml-auto w-10 h-10 rounded-full bg-surface-white border border-outline-variant/30 flex items-center justify-center text-primary hover:bg-surface-container active:scale-95 transition-all shadow-sm">
+<span class="material-symbols-outlined text-[20px]">call</span>
+</button>
+</div>
+</article>
+<!-- Card: Pending (Yellow/Warning) -->
+<article class="bg-surface-white rounded-xl shadow-[0_4px_12px_rgba(0,0,0,0.03)] border border-outline-variant/10 p-5 flex flex-col gap-5">
+<!-- Status & Time -->
+<div class="flex justify-between items-start">
+<span class="bg-warning text-white px-3 py-1.5 rounded-full font-label-sm text-label-sm shadow-sm">Pending</span>
+<div class="flex flex-col items-end">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Pickup Time</span>
+<span class="font-data-tabular text-data-tabular text-primary font-semibold text-[16px]">Tomorrow, 08:00</span>
+</div>
+</div>
+<!-- Itinerary -->
+<div class="flex gap-4">
+<div class="flex flex-col items-center pt-1">
+<div class="w-3 h-3 rounded-full border-2 border-primary bg-surface-white z-10"></div>
+<div class="w-[2px] h-6 bg-outline-variant/30 my-1"></div>
+<span class="material-symbols-outlined text-primary text-[18px]">location_on</span>
+</div>
+<div class="flex flex-col gap-3 w-full">
+<span class="font-body-md text-body-md text-on-surface font-medium">150 E 52nd St (HQ)</span>
+<span class="font-body-md text-body-md text-on-surface font-medium">Newark Liberty Int (EWR)</span>
+</div>
+</div>
+<!-- Cancel Button -->
+<button class="w-full py-2.5 rounded-lg border border-primary text-primary font-label-md text-label-md bg-surface-white hover:bg-surface-container active:scale-[0.98] transition-transform text-center mt-2">
+                    Cancelar Reserva
+                </button>
+</article>
+</section>
+<!-- Past Rides History -->
+<section class="flex flex-col gap-4">
+<h2 class="font-label-md text-label-md text-on-surface-variant uppercase tracking-widest">Recent History</h2>
+<div class="flex flex-col gap-3">
+<!-- History Item 1 -->
+<div class="bg-surface-white rounded-lg border border-outline-variant/10 p-4 flex items-center justify-between shadow-sm">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined text-[20px]">check_circle</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface">LGA to Financial District</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Oct 12, 2023 • Completed</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline-variant">chevron_right</span>
+</div>
+<!-- History Item 2 -->
+<div class="bg-surface-white rounded-lg border border-outline-variant/10 p-4 flex items-center justify-between shadow-sm">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined text-[20px]">check_circle</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface">Midtown to JFK</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Oct 05, 2023 • Completed</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline-variant">chevron_right</span>
+</div>
+</div>
+<button class="font-label-md text-label-md text-secondary mt-2 text-center w-full active:opacity-70">View All History</button>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="bg-surface-white dark:bg-primary-container shadow-[0_-2px_10px_rgba(0,0,0,0.05)] fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-2 py-3 md:hidden">
+<div class="flex flex-col items-center justify-center bg-secondary-container dark:bg-secondary text-on-secondary-container dark:text-on-secondary rounded-full px-4 py-1 transition-all duration-200 active:scale-90 cursor-pointer">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">home</span>
+<span class="font-label-sm text-label-sm mt-1">Home</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-primary-container/60 hover:text-primary dark:hover:text-primary-fixed transition-all duration-200 active:scale-90 cursor-pointer">
+<span class="material-symbols-outlined">directions_car</span>
+<span class="font-label-sm text-label-sm mt-1">My Rides</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-primary-container/60 hover:text-primary dark:hover:text-primary-fixed transition-all duration-200 active:scale-90 cursor-pointer">
+<span class="material-symbols-outlined">support_agent</span>
+<span class="font-label-sm text-label-sm mt-1">Support</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-primary-container/60 hover:text-primary dark:hover:text-primary-fixed transition-all duration-200 active:scale-90 cursor-pointer">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-sm text-label-sm mt-1">Profile</span>
+</div>
+</nav>
+</body></html>

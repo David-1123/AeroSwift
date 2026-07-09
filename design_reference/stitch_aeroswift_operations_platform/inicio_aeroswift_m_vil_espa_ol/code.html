@@ -1,0 +1,198 @@
+<!DOCTYPE html><html lang="es" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>AeroSwift - Traslados Premium al Aeropuerto</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Playfair+Display:wght@600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Theme Config -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "inverse-primary": "#c1c6d7",
+                        "on-secondary": "#ffffff",
+                        "tertiary-fixed": "#f5dfc4",
+                        "surface-white": "#FFFFFF",
+                        "on-tertiary": "#ffffff",
+                        "surface-variant": "#e7e2d9",
+                        "primary-fixed-dim": "#c1c6d7",
+                        "surface": "#fef9f0",
+                        "on-tertiary-container": "#96856d",
+                        "surface-dim": "#ded9d1",
+                        "tertiary-container": "#291e0d",
+                        "on-surface-variant": "#45474c",
+                        "primary-container": "#1a202c",
+                        "surface-container-low": "#f8f3ea",
+                        "status-pending": "#E2E8F0",
+                        "secondary-fixed": "#ffdeab",
+                        "on-error": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "primary-fixed": "#dde2f3",
+                        "secondary": "#745a2d",
+                        "primary": "#030813",
+                        "inverse-on-surface": "#f5f0e7",
+                        "on-primary-fixed": "#161c27",
+                        "outline-variant": "#c6c6cc",
+                        "status-en-route": "#2D3748",
+                        "error-container": "#ffdad6",
+                        "on-primary-container": "#828796",
+                        "surface-tint": "#585e6c",
+                        "on-primary-fixed-variant": "#414754",
+                        "on-secondary-fixed-variant": "#5a4317",
+                        "surface-container": "#f2ede4",
+                        "on-secondary-container": "#795e30",
+                        "secondary-container": "#ffdaa1",
+                        "success": "#2F855A",
+                        "secondary-fixed-dim": "#e4c18a",
+                        "surface-bright": "#fef9f0",
+                        "on-error-container": "#93000a",
+                        "on-tertiary-fixed": "#241a09",
+                        "outline": "#76777c",
+                        "on-surface": "#1d1c16",
+                        "tertiary-fixed-dim": "#d8c3a9",
+                        "on-background": "#1d1c16",
+                        "inverse-surface": "#32302b",
+                        "tertiary": "#0e0700",
+                        "on-tertiary-fixed-variant": "#524531",
+                        "error": "#C53030",
+                        "on-secondary-fixed": "#271900",
+                        "on-primary": "#ffffff",
+                        "status-assigned": "#BD9D69",
+                        "warning": "#B7791F",
+                        "background": "#fef9f0",
+                        "surface-container-highest": "#e7e2d9",
+                        "surface-container-high": "#ece8df"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "table-cell-padding": "12px 16px",
+                        "container-max": "1280px",
+                        "gutter": "24px",
+                        "margin-mobile": "16px",
+                        "margin-desktop": "40px",
+                        "base": "8px"
+                    },
+                    "fontFamily": {
+                        "label-md": ["Inter"],
+                        "headline-md": ["Playfair Display"],
+                        "body-lg": ["Inter"],
+                        "headline-lg-mobile": ["Playfair Display"],
+                        "display-lg": ["Playfair Display"],
+                        "headline-lg": ["Playfair Display"],
+                        "body-sm": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "data-tabular": ["Inter"],
+                        "body-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-md": ["14px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "700" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "700" }],
+                        "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "label-sm": ["12px", { "lineHeight": "14px", "fontWeight": "500" }],
+                        "data-tabular": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background font-body-md antialiased min-h-screen flex flex-col pt-[72px] pb-[72px] md:pb-0">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-surface dark:bg-surface-dim border-b border-outline-variant/10 flex justify-between items-center px-margin-mobile md:px-margin-desktop py-4">
+<div class="text-headline-md font-headline-md text-primary dark:text-inverse-primary">AeroSwift</div>
+<!-- Web Nav (Hidden on Mobile) -->
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-primary dark:text-inverse-primary font-bold hover:bg-surface-container dark:hover:bg-surface-container-high transition-colors cursor-pointer active:scale-95 duration-150 py-2 px-3 rounded" href="#">Inicio</a>
+<a class="text-on-surface-variant dark:text-outline hover:bg-surface-container dark:hover:bg-surface-container-high transition-colors cursor-pointer active:scale-95 duration-150 py-2 px-3 rounded" href="#">Mis Viajes</a>
+<a class="text-on-surface-variant dark:text-outline hover:bg-surface-container dark:hover:bg-surface-container-high transition-colors cursor-pointer active:scale-95 duration-150 py-2 px-3 rounded" href="#">Soporte</a>
+</nav>
+<div class="flex items-center gap-4">
+<button aria-label="Idioma" class="text-primary hover:bg-surface-container transition-colors rounded-full p-2 cursor-pointer active:scale-95 duration-150">
+<span class="material-symbols-outlined">language</span>
+</button>
+<div class="w-10 h-10 rounded-full bg-surface-variant overflow-hidden border border-outline-variant/20 hidden md:block">
+<img alt="Perfil de Usuario Ejecutivo" class="w-full h-full object-cover" data-alt="A professional headshot of an executive user in a tailored charcoal suit, slight smile, warm professional lighting against a clean, modern high-key white background, conveying reliability and premium service in an airport logistics context." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB0FWz_2lpykN-SnrWB8iAwJb1I0ngGVTuruFBYJ3naNgsVft4rueAsoNkehKFsfke8IMzwyPqVhMWmU3UPnMVMBpZnZD0Hk2Z69bgF9Jq1xRa-Ob6PI92Zy8Y0TK6c84PeVPVaH97l9OXQkEaxUlTer9FbVyYPZw4ywxdbas5vKiKg0E5o7mL8cImWKK1DJugJesx1SI0V_RMStdf49zWc7pK6sJutWQuLvuL03jNfBiGQdw8pfly8">
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="flex-grow">
+<!-- Hero Section with Image Background -->
+<section class="relative w-full h-[60vh] min-h-[400px] flex items-center justify-center overflow-hidden">
+<!-- Background Image using Placeholder -->
+<div aria-hidden="true" class="absolute inset-0 bg-cover bg-center bg-no-repeat" style="background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuDH1TGm57IR6XoofhUnKo4lIX64Ad0ojZ4xY1gTUlYAKLDd61ooDGLk6ZbxPjljAAQ3obBxCTQytBmk4Fnw19aqlacAtKrdRQux3PEvxyJ7_wKEGGNqU1Ynri5Eu3m8dLu1-c6jfp14gkgMtd7OcrBGoDFBTr8VDN47DEzYsdB5UD8EUWBXwcUMEl6rydyDN3anvxr4LWqe6wIVuRPqgqgil7alC4uc_yEAaihV3uhLM1TFCI9z_6sE29VZIP4Dq8wGXA&quot;);"></div>
+<!-- Dark Overlay for Readability -->
+<div class="absolute inset-0 bg-primary/60 backdrop-blur-[2px]"></div>
+<div class="relative z-10 w-full max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop flex flex-col items-center text-center">
+<!-- Disclaimer Badge -->
+
+<h1 class="font-headline-lg-mobile md:font-display-lg text-headline-lg-mobile md:text-display-lg text-on-primary mb-4 max-w-2xl text-shadow-sm">
+                    Traslados Premium al Aeropuerto
+                </h1>
+<p class="font-body-lg text-body-lg text-inverse-primary mb-8 max-w-xl">Tarifas Fijas Aeropuerto de Quito:<br><span class="font-semibold text-on-primary">$20 Estándar</span></p>
+<button class="bg-primary text-on-primary font-label-md text-label-md py-4 px-8 rounded hover:bg-surface-tint transition-colors active:scale-95 shadow-lg border border-outline-variant/20">
+                    Reservar Viaje
+                </button>
+</div>
+</section>
+<!-- Summary Cards Section -->
+
+</main>
+<!-- Footer -->
+<footer class="w-full px-margin-mobile md:px-margin-desktop py-8 flex flex-col md:flex-row justify-between items-center gap-4 bg-surface-container-highest dark:bg-primary-container border-t border-outline-variant/20">
+<div class="font-headline-md text-headline-md text-primary">AeroSwift</div>
+<div class="flex flex-wrap justify-center gap-4 md:gap-6 font-body-sm text-body-sm">
+<a class="text-on-surface-variant dark:text-on-primary-fixed-variant hover:text-secondary dark:hover:text-secondary-fixed transition-colors underline-offset-4 hover:underline" href="#">Términos de Servicio</a>
+<a class="text-on-surface-variant dark:text-on-primary-fixed-variant hover:text-secondary dark:hover:text-secondary-fixed transition-colors underline-offset-4 hover:underline" href="#">Política de Privacidad</a>
+
+<a class="text-on-surface-variant dark:text-on-primary-fixed-variant hover:text-secondary dark:hover:text-secondary-fixed transition-colors underline-offset-4 hover:underline" href="#">Política de Equipaje</a>
+</div>
+<div class="text-on-surface-variant dark:text-on-primary-fixed-variant font-body-sm text-body-sm text-center md:text-right">
+            © 2024 AeroSwift Executive. Todos los derechos reservados.
+        </div>
+</footer>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-2 py-3 bg-surface-white dark:bg-primary-container shadow-[0_-2px_10px_rgba(0,0,0,0.05)] md:hidden">
+<a class="flex flex-col items-center justify-center bg-secondary-container dark:bg-secondary text-on-secondary-container dark:text-on-secondary rounded-full px-4 py-1 transition-all duration-200 active:scale-90" href="#">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 1;">home</span>
+<span class="font-label-sm text-label-sm">Inicio</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-primary-container/60 hover:text-primary dark:hover:text-primary-fixed transition-all duration-200 active:scale-90 px-4 py-1" href="#">
+<span class="material-symbols-outlined mb-1">directions_car</span>
+<span class="font-label-sm text-label-sm">Mis Viajes</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-primary-container/60 hover:text-primary dark:hover:text-primary-fixed transition-all duration-200 active:scale-90 px-4 py-1" href="#">
+<span class="material-symbols-outlined mb-1">support_agent</span>
+<span class="font-label-sm text-label-sm">Soporte</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-primary-container/60 hover:text-primary dark:hover:text-primary-fixed transition-all duration-200 active:scale-90 px-4 py-1" href="#">
+<span class="material-symbols-outlined mb-1">person</span>
+<span class="font-label-sm text-label-sm">Perfil</span>
+</a>
+</nav>
+
+
+
+
+
+
+</body></html>

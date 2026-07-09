@@ -1,0 +1,261 @@
+<!DOCTYPE html><html class="light" lang="es"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>AeroSwift - Pago</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-dim": "#ded9d1",
+                        "on-secondary": "#ffffff",
+                        "secondary": "#745a2d",
+                        "on-secondary-fixed-variant": "#5a4317",
+                        "secondary-fixed": "#ffdeab",
+                        "on-secondary-fixed": "#271900",
+                        "surface-white": "#FFFFFF",
+                        "primary": "#030813",
+                        "on-primary-container": "#828796",
+                        "surface-container-lowest": "#ffffff",
+                        "surface": "#fef9f0",
+                        "surface-bright": "#fef9f0",
+                        "on-tertiary-fixed-variant": "#524531",
+                        "on-background": "#1d1c16",
+                        "on-tertiary": "#ffffff",
+                        "tertiary": "#0e0700",
+                        "primary-container": "#1a202c",
+                        "on-surface": "#1d1c16",
+                        "on-tertiary-container": "#96856d",
+                        "tertiary-fixed-dim": "#d8c3a9",
+                        "on-tertiary-fixed": "#241a09",
+                        "inverse-surface": "#32302b",
+                        "error-container": "#ffdad6",
+                        "on-secondary-container": "#795e30",
+                        "surface-variant": "#e7e2d9",
+                        "status-pending": "#E2E8F0",
+                        "outline": "#76777c",
+                        "error": "#C53030",
+                        "on-primary": "#ffffff",
+                        "background": "#fef9f0",
+                        "surface-container-low": "#f8f3ea",
+                        "primary-fixed-dim": "#c1c6d7",
+                        "inverse-on-surface": "#f5f0e7",
+                        "on-error-container": "#93000a",
+                        "secondary-fixed-dim": "#e4c18a",
+                        "tertiary-fixed": "#f5dfc4",
+                        "tertiary-container": "#291e0d",
+                        "status-assigned": "#BD9D69",
+                        "surface-container": "#f2ede4",
+                        "on-surface-variant": "#45474c",
+                        "status-en-route": "#2D3748",
+                        "inverse-primary": "#c1c6d7",
+                        "warning": "#B7791F",
+                        "outline-variant": "#c6c6cc",
+                        "on-error": "#ffffff",
+                        "on-primary-fixed": "#161c27",
+                        "success": "#2F855A",
+                        "surface-container-high": "#ece8df",
+                        "on-primary-fixed-variant": "#414754",
+                        "secondary-container": "#ffdaa1",
+                        "surface-container-highest": "#e7e2d9",
+                        "primary-fixed": "#dde2f3",
+                        "surface-tint": "#585e6c"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "margin-mobile": "16px",
+                        "gutter": "24px",
+                        "table-cell-padding": "12px 16px",
+                        "container-max": "1280px",
+                        "base": "8px",
+                        "margin-desktop": "40px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Playfair Display"],
+                        "headline-lg": ["Playfair Display"],
+                        "headline-md": ["Playfair Display"],
+                        "data-tabular": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "display-lg": ["Playfair Display"],
+                        "body-sm": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "label-md": ["Inter"],
+                        "body-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "700" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "700" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "data-tabular": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "label-sm": ["12px", { "lineHeight": "14px", "fontWeight": "500" }],
+                        "label-md": ["14px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            background-color: theme('colors.surface-container-low');
+        }
+        /* Custom radio button styling */
+        input[type="radio"]:checked {
+            accent-color: theme('colors.secondary');
+        }
+    </style>
+</head>
+<body class="antialiased min-h-screen pb-24 md:pb-0 flex flex-col md:flex-row">
+<!-- Mobile Top App Bar (From Shared Components) -->
+<header class="bg-surface dark:bg-surface-dim border-b border-outline-variant/10 docked full-width top-0 flat no shadows flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop py-4 hidden md:flex">
+<div class="text-headline-md font-headline-md text-primary dark:text-inverse-primary font-bold">AeroSwift</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer active:scale-95 duration-150" data-icon="language">language</span>
+</div>
+</header>
+<!-- Main Content Area -->
+<main class="flex-1 w-full max-w-md mx-auto md:max-w-2xl px-margin-mobile pt-8 md:pt-12">
+<!-- Back Button & Header -->
+<div class="flex items-center gap-4 mb-8">
+<button class="p-2 rounded-full hover:bg-surface-variant transition-colors cursor-pointer active:scale-95">
+<span class="material-symbols-outlined text-primary text-xl" data-icon="arrow_back">arrow_back</span>
+</button>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary md:font-headline-lg md:text-headline-lg">Pago</h1>
+</div>
+<!-- Progress Indicator -->
+<div class="flex items-center justify-between mb-8 relative px-2">
+<!-- Connecting Line -->
+<div class="absolute top-1/2 left-4 right-4 h-[2px] bg-outline-variant -z-10 -translate-y-1/2"></div>
+<div class="absolute top-1/2 left-4 w-2/3 h-[2px] bg-secondary -z-10 -translate-y-1/2"></div>
+<!-- Step 1 -->
+<div class="flex flex-col items-center gap-2 bg-surface-container-low">
+<div class="w-8 h-8 rounded-full bg-secondary flex items-center justify-center text-on-secondary font-label-md text-label-md">
+<span class="material-symbols-outlined text-sm" data-icon="check">check</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Ruta</span>
+</div>
+<!-- Step 2 -->
+<div class="flex flex-col items-center gap-2 bg-surface-container-low">
+<div class="w-8 h-8 rounded-full bg-secondary flex items-center justify-center text-on-secondary font-label-md text-label-md">
+<span class="material-symbols-outlined text-sm" data-icon="check">check</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Datos</span>
+</div>
+<!-- Step 3 (Active) -->
+<div class="flex flex-col items-center gap-2 bg-surface-container-low">
+<div class="w-8 h-8 rounded-full border-2 border-secondary bg-surface-container-low flex items-center justify-center text-secondary font-label-md text-label-md font-bold">
+                    3
+                </div>
+<span class="font-label-sm text-label-sm text-secondary font-bold">Pago</span>
+</div>
+</div>
+<!-- Trip Summary Card -->
+<div class="bg-surface-white border border-outline-variant/20 rounded-xl p-4 mb-8 shadow-sm">
+<h2 class="font-label-md text-label-md text-on-surface-variant mb-2 uppercase tracking-wider">Resumen del Viaje</h2>
+<div class="flex justify-between items-end">
+<div>
+<p class="font-body-lg text-body-lg text-primary font-medium">Quito - Aeropuerto</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">Viaje Ejecutivo</p>
+</div>
+<div class="text-right">
+<p class="font-headline-md text-headline-md text-primary">$20.00</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Tarifa fija</p>
+</div>
+</div>
+</div>
+<!-- Payment Methods -->
+<section class="mb-8">
+<h2 class="font-headline-md text-headline-md text-primary mb-4">Método de Pago</h2>
+<form class="flex flex-col gap-3">
+<!-- Option 1: Transferencia -->
+<label class="flex items-start p-4 bg-surface-white border border-outline-variant/20 rounded-lg cursor-pointer hover:border-secondary transition-colors relative overflow-hidden group">
+<div class="absolute inset-0 bg-secondary/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<div class="mt-1 mr-4">
+<input checked="" class="w-4 h-4 text-secondary focus:ring-secondary border-outline-variant" name="payment_method" type="radio" value="transfer">
+</div>
+<div class="flex-1">
+<div class="flex items-center gap-2 mb-1">
+<span class="material-symbols-outlined text-secondary" data-icon="account_balance">account_balance</span>
+<span class="font-label-md text-label-md text-primary font-bold">Transferencia Bancaria</span>
+</div>
+<div class="mt-2 space-y-1 text-body-sm text-on-surface-variant">
+    <p class=""><span class="font-bold">Banco:</span> Banco Pichincha</p>
+    <p class=""><span class="font-bold">Tipo de Cuenta:</span> Cuenta de Ahorros</p>
+    <p class=""><span class="font-bold">Titular:</span> Elizabeth Silva</p>
+    <div class="flex justify-between items-center">
+        <p class=""><span class="font-bold">Número de Cuenta:</span> 4279721800</p>
+        <span class="text-secondary font-label-sm cursor-pointer">Copiar</span>
+    </div>
+    <div class="flex justify-between items-center">
+        <p class=""><span class="font-bold">Cédula / RUC:</span> 0201512365</p>
+        <span class="text-secondary font-label-sm cursor-pointer">Copiar</span>
+    </div>
+</div>
+</div>
+</label>
+<!-- Option 2: Deuna -->
+<label class="flex items-start p-4 bg-surface-white border border-outline-variant/20 rounded-lg cursor-pointer hover:border-secondary transition-colors relative overflow-hidden group">
+<div class="absolute inset-0 bg-secondary/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<div class="mt-1 mr-4">
+<input class="w-4 h-4 text-secondary focus:ring-secondary border-outline-variant" name="payment_method" type="radio" value="deuna">
+</div>
+<div class="flex-1"><div class="flex items-center gap-2 mb-1">
+    <span class="material-symbols-outlined text-secondary" data-icon="qr_code_scanner">qr_code_scanner</span>
+    <span class="font-label-md text-label-md text-primary font-bold">Deuna!</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-3">Escanea el código QR para pagar</p>
+<div class="w-32 h-32 mx-auto border border-outline-variant/20 rounded-lg overflow-hidden">
+    <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAjOYqZXtiAaS5aDjF80KqRdeno8yv7akpunb-1ZH0ieO2oCnuAm5f8sr00rh-6CONYffkHMvQNXV_30DZCysRHRekItAn7e54-prIyt0IcLkcR7q_ULrfcwIrpC-ebqBmVCu--BFCGmiwwszosHC8jYYUL8JPpgSfm-tkG85wz-ProibLhUW72CA4SSnJR3X1Bry1cVVJA2qKDkaSmOP0uIhNBgT1HwbiEt168ek-LjYi-43zqEIgckad655UoX2s0Rw" alt="QR Deuna" class="w-full h-full object-contain">
+</div></div>
+</label>
+<!-- Option 3: Tarjeta -->
+<label class="flex items-start p-4 bg-surface-white border border-outline-variant/20 rounded-lg cursor-pointer hover:border-secondary transition-colors relative overflow-hidden group">
+<div class="absolute inset-0 bg-secondary/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<div class="mt-1 mr-4">
+<input class="w-4 h-4 text-secondary focus:ring-secondary border-outline-variant" name="payment_method" type="radio" value="card">
+</div>
+<div class="flex-1">
+<div class="flex items-center gap-2 mb-1">
+<span class="material-symbols-outlined text-secondary" data-icon="credit_card">credit_card</span>
+<span class="font-label-md text-label-md text-primary font-bold">Tarjeta de Crédito</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Cobro presencial con datáfono. <span class="block mt-1 text-label-sm italic">Este servicio se realiza en persona durante el viaje.</span></p>
+</div>
+</label>
+</form>
+</section>
+<!-- Information Notice -->
+<div class="bg-secondary-container/30 border border-secondary/20 rounded-lg p-4 mb-8 flex gap-3 items-start">
+<span class="material-symbols-outlined text-secondary mt-0.5" data-icon="info">info</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+                Envía tu comprobante por WhatsApp para confirmar tu reserva de inmediato.
+            </p>
+</div>
+<!-- Action Buttons -->
+<div class="flex flex-col gap-4 mb-12">
+<button class="w-full bg-primary text-on-primary py-3 rounded-lg font-label-md text-label-md hover:bg-primary/90 transition-colors active:scale-[0.98]">
+                Continuar
+            </button>
+<button class="w-full bg-transparent border border-outline text-on-surface py-3 rounded-lg font-label-md text-label-md hover:bg-surface-variant transition-colors active:scale-[0.98]">
+                Atrás
+            </button>
+</div>
+</main>
+<!-- Bottom Navigation Bar (Hidden on Desktop) - suppressed for linear flow as per instructions, but adding empty block to satisfy structure requirement if needed, though instructions say "Automatic Suppression: You MUST exclude the navigation shell if the page intent is: Linear/Transactional" -->
+<!-- Suppressed Nav Bar -->
+
+
+</body></html>

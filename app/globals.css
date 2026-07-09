@@ -1,0 +1,39 @@
+@import "tailwindcss";
+
+/* Sistema de diseño "Executive Transit" — onyx/charcoal + dorado champán sobre
+   fondo "bone". Tipografías: Playfair Display (titulares) + Inter (UI/datos). */
+@theme {
+  --color-bone: #f8f3ea;
+  --color-surface: #fef9f0;
+  --color-surface-card: #ffffff;
+  --color-onyx: #1a202c;
+  --color-onyx-deep: #030813;
+  --color-gold: #bd9d69;
+  --color-gold-soft: #f3e2c0;
+  --color-ink: #1d1c16;
+  --color-ink-soft: #45474c;
+  --color-line: #e0dbd0;
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-playfair), Georgia, serif;
+}
+
+html {
+  color-scheme: light;
+}
+
+body {
+  background-color: var(--color-bone);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+.font-display {
+  font-family: var(--font-display);
+}
+
+/* Números tabulares para tablas de datos (vuelos, horarios, montos). */
+.tabular {
+  font-variant-numeric: tabular-nums;
+}

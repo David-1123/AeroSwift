@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AeroSwift - Reservas</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Playfair+Display:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "inverse-primary": "#c1c6d7",
+                      "on-secondary": "#ffffff",
+                      "tertiary-fixed": "#f5dfc4",
+                      "surface-white": "#FFFFFF",
+                      "on-tertiary": "#ffffff",
+                      "surface-variant": "#e7e2d9",
+                      "primary-fixed-dim": "#c1c6d7",
+                      "surface": "#fef9f0",
+                      "on-tertiary-container": "#96856d",
+                      "surface-dim": "#ded9d1",
+                      "tertiary-container": "#291e0d",
+                      "on-surface-variant": "#45474c",
+                      "primary-container": "#1a202c",
+                      "surface-container-low": "#f8f3ea",
+                      "status-pending": "#E2E8F0",
+                      "secondary-fixed": "#ffdeab",
+                      "on-error": "#ffffff",
+                      "surface-container-lowest": "#ffffff",
+                      "primary-fixed": "#dde2f3",
+                      "secondary": "#745a2d",
+                      "primary": "#030813",
+                      "inverse-on-surface": "#f5f0e7",
+                      "on-primary-fixed": "#161c27",
+                      "outline-variant": "#c6c6cc",
+                      "status-en-route": "#2D3748",
+                      "error-container": "#ffdad6",
+                      "on-primary-container": "#828796",
+                      "surface-tint": "#585e6c",
+                      "on-primary-fixed-variant": "#414754",
+                      "on-secondary-fixed-variant": "#5a4317",
+                      "surface-container": "#f2ede4",
+                      "on-secondary-container": "#795e30",
+                      "secondary-container": "#ffdaa1",
+                      "success": "#2F855A",
+                      "secondary-fixed-dim": "#e4c18a",
+                      "surface-bright": "#fef9f0",
+                      "on-error-container": "#93000a",
+                      "on-tertiary-fixed": "#241a09",
+                      "outline": "#76777c",
+                      "on-surface": "#1d1c16",
+                      "tertiary-fixed-dim": "#d8c3a9",
+                      "on-background": "#1d1c16",
+                      "inverse-surface": "#32302b",
+                      "tertiary": "#0e0700",
+                      "on-tertiary-fixed-variant": "#524531",
+                      "error": "#C53030",
+                      "on-secondary-fixed": "#271900",
+                      "on-primary": "#ffffff",
+                      "status-assigned": "#BD9D69",
+                      "warning": "#B7791F",
+                      "background": "#fef9f0",
+                      "surface-container-highest": "#e7e2d9",
+                      "surface-container-high": "#ece8df"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "table-cell-padding": "12px 16px",
+                      "container-max": "1280px",
+                      "gutter": "24px",
+                      "margin-mobile": "16px",
+                      "margin-desktop": "40px",
+                      "base": "8px"
+              },
+              "fontFamily": {
+                      "label-md": [
+                              "Inter"
+                      ],
+                      "headline-md": [
+                              "Playfair Display"
+                      ],
+                      "body-lg": [
+                              "Inter"
+                      ],
+                      "headline-lg-mobile": [
+                              "Playfair Display"
+                      ],
+                      "display-lg": [
+                              "Playfair Display"
+                      ],
+                      "headline-lg": [
+                              "Playfair Display"
+                      ],
+                      "body-sm": [
+                              "Inter"
+                      ],
+                      "label-sm": [
+                              "Inter"
+                      ],
+                      "data-tabular": [
+                              "Inter"
+                      ],
+                      "body-md": [
+                              "Inter"
+                      ]
+              },
+              "fontSize": {
+                      "label-md": [
+                              "14px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-lg-mobile": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "display-lg": [
+                              "48px",
+                              {
+                                      "lineHeight": "56px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "body-sm": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "label-sm": [
+                              "12px",
+                              {
+                                      "lineHeight": "14px",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "data-tabular": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+<style>
+        .step-content { display: none; }
+        .step-content.active { display: flex; animation: fadeIn 0.3s ease-in-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        
+        /* Hide scrollbar for clean mobile look */
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+      </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-surface text-on-surface font-body-md antialiased min-h-screen flex flex-col items-center">
+<!-- Mobile Constraint Wrapper for Presentation -->
+<div class="w-full max-w-[428px] bg-surface min-h-screen flex flex-col relative shadow-2xl overflow-hidden">
+<!-- TopAppBar (From JSON, Nav Shell Suppressed for Transactional Form) -->
+<header class="bg-surface border-b border-outline-variant/10 docked full-width top-0 flex justify-between items-center w-full px-margin-mobile py-4 sticky z-50">
+<div class="flex items-center gap-3">
+<!-- Implicit Back Button for Forms -->
+<button class="material-symbols-outlined text-primary cursor-pointer active:scale-95 duration-150 p-1 rounded-full hover:bg-surface-container">arrow_back</button>
+<div class="text-headline-md font-headline-md text-primary tracking-tight">AeroSwift</div>
+</div>
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer active:scale-95 duration-150 hover:bg-surface-container transition-colors p-2 rounded-full">language</span>
+</div>
+</header>
+<!-- Stepper Indicator -->
+<div class="px-margin-mobile py-6 bg-surface z-40 sticky top-[72px]">
+<div class="flex items-center justify-between relative">
+<!-- Connecting Line Background -->
+<div class="absolute left-4 right-4 top-4 h-0.5 bg-outline-variant/30 -z-10 rounded-full"></div>
+<!-- Active Line Progress (JS updates width) -->
+<div class="absolute left-4 top-4 h-0.5 bg-secondary -z-10 rounded-full transition-all duration-300" id="progress-line" style="width: 0%;"></div>
+<!-- Step 1 Node -->
+<div class="flex flex-col items-center gap-2 bg-surface relative z-10 px-1 step-node" data-step="1">
+<div class="w-8 h-8 rounded-full bg-primary text-on-primary flex items-center justify-center font-label-md text-label-md shadow-md ring-4 ring-surface transition-colors duration-300">1</div>
+<span class="font-label-sm text-label-sm text-primary font-semibold text-center leading-tight">Detalles del Viaje</span>
+</div>
+<!-- Step 2 Node -->
+<div class="flex flex-col items-center gap-2 bg-surface relative z-10 px-1 step-node" data-step="2">
+<div class="w-8 h-8 rounded-full bg-surface-variant text-on-surface-variant flex items-center justify-center font-label-md text-label-md ring-4 ring-surface transition-colors duration-300">2</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant text-center leading-tight">Logística y Restricciones</span>
+</div>
+<!-- Step 3 Node -->
+<div class="flex flex-col items-center gap-2 bg-surface relative z-10 px-1 step-node" data-step="3">
+<div class="w-8 h-8 rounded-full bg-surface-variant text-on-surface-variant flex items-center justify-center font-label-md text-label-md ring-4 ring-surface transition-colors duration-300">3</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant text-center leading-tight">Vuelo</span>
+</div>
+<!-- Step 4 Node -->
+<div class="flex flex-col items-center gap-2 bg-surface relative z-10 px-1 step-node" data-step="4">
+<div class="w-8 h-8 rounded-full bg-surface-variant text-on-surface-variant flex items-center justify-center font-label-md text-label-md ring-4 ring-surface transition-colors duration-300">4</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant text-center leading-tight">Resumen</span>
+</div>
+</div>
+</div>
+<!-- Main Form Content Area -->
+<main class="flex-grow px-margin-mobile pb-24 overflow-y-auto no-scrollbar flex flex-col gap-6">
+<!-- STEP 1: Ride Details -->
+<section class="step-content active flex-col gap-6" id="step-1">
+<div class="bg-surface-white rounded-xl border border-outline-variant/20 p-6 flex flex-col gap-6 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)]">
+<div class="flex flex-col gap-1">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-primary">Detalles del Viaje</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">¿Cuándo y dónde le recogemos?</p>
+</div>
+<!-- Date & Time Grid -->
+<div class="grid grid-cols-2 gap-4">
+<div class="flex flex-col gap-1.5">
+<label class="font-label-sm text-label-sm text-on-surface-variant">Fecha</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline-variant text-[20px]">calendar_today</span>
+<input class="w-full pl-10 pr-3 py-3 rounded-lg border border-outline-variant/50 bg-surface-white text-on-surface focus:border-secondary focus:ring-1 focus:ring-secondary transition-all outline-none font-body-md appearance-none" type="date"/>
+</div>
+</div>
+<div class="flex flex-col gap-1.5">
+<label class="font-label-sm text-label-sm text-on-surface-variant">Hora</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline-variant text-[20px]">schedule</span>
+<input class="w-full pl-10 pr-3 py-3 rounded-lg border border-outline-variant/50 bg-surface-white text-on-surface focus:border-secondary focus:ring-1 focus:ring-secondary transition-all outline-none font-body-md appearance-none" type="time"/>
+</div>
+</div>
+</div>
+<!-- Pickup Address with visual map element -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label-sm text-label-sm text-on-surface-variant">Dirección de Recogida</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-3 text-secondary text-[20px]">location_on</span>
+<textarea class="w-full pl-10 pr-3 py-3 rounded-lg border border-outline-variant/50 bg-surface-white text-on-surface focus:border-secondary focus:ring-1 focus:ring-secondary transition-all outline-none font-body-md resize-none" placeholder="Ej. Hotel JW Marriott, Av. Orellana" rows="2"></textarea>
+</div>
+</div>
+<!-- Sector Dropdown (Required) -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label-sm text-label-sm text-on-surface-variant">Sector de Quito <span class="text-error">*</span></label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline-variant text-[20px]">map</span>
+<select class="w-full pl-10 pr-10 py-3 rounded-lg border border-outline-variant/50 bg-surface-white text-on-surface focus:border-secondary focus:ring-1 focus:ring-secondary transition-all outline-none font-body-md appearance-none" id="sector-select">
+<option disabled="" selected="" value="">Seleccione un sector...</option>
+<option value="20">Norte / Centro / Sur ($20.00)</option>
+<option value="25">Valles / Aeropuerto ($25.00)</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-outline-variant pointer-events-none">expand_more</span>
+</div>
+</div>
+</div>
+<button class="w-full bg-primary text-on-primary font-label-md text-label-md py-4 rounded-lg shadow-md active:scale-[0.98] transition-transform flex items-center justify-center gap-2" onclick="nextStep(2)">
+                    Continuar <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+</section>
+<!-- STEP 2: Logistics -->
+<section class="step-content flex-col gap-6" id="step-2">
+<div class="bg-surface-white rounded-xl border border-outline-variant/20 p-6 flex flex-col gap-8 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)]">
+<div class="flex flex-col gap-1">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-primary">Logística y Restricciones</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Detalles para asignar el vehículo adecuado.</p>
+</div>
+<!-- Pasajeros Counter -->
+<div class="flex items-center justify-between border-b border-outline-variant/10 pb-6">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface">Pasajeros <span class="text-error">*</span></span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Máximo 4 personas</span>
+</div>
+<div class="flex items-center gap-4 bg-surface-container-low rounded-full p-1 border border-outline-variant/20">
+<button class="w-8 h-8 rounded-full flex items-center justify-center bg-surface-white shadow-sm active:bg-surface-variant text-on-surface" onclick="updateCounter('pax', -1)"><span class="material-symbols-outlined text-[20px]">remove</span></button>
+<span class="font-data-tabular text-data-tabular font-semibold w-4 text-center" id="pax-count">1</span>
+<button class="w-8 h-8 rounded-full flex items-center justify-center bg-surface-white shadow-sm active:bg-surface-variant text-on-surface" onclick="updateCounter('pax', 1)"><span class="material-symbols-outlined text-[20px]">add</span></button>
+</div>
+</div>
+<!-- Maletas Counter -->
+<div class="flex items-center justify-between pb-2">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface">Maletas Grandes <span class="text-error">*</span></span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Bodega (Máximo 3)</span>
+</div>
+<div class="flex items-center gap-4 bg-surface-container-low rounded-full p-1 border border-outline-variant/20">
+<button class="w-8 h-8 rounded-full flex items-center justify-center bg-surface-white shadow-sm active:bg-surface-variant text-on-surface" onclick="updateCounter('bags', -1)"><span class="material-symbols-outlined text-[20px]">remove</span></button>
+<span class="font-data-tabular text-data-tabular font-semibold w-4 text-center" id="bags-count">0</span>
+<button class="w-8 h-8 rounded-full flex items-center justify-center bg-surface-white shadow-sm active:bg-surface-variant text-on-surface" onclick="updateCounter('bags', 1)"><span class="material-symbols-outlined text-[20px]">add</span></button>
+</div>
+</div>
+</div>
+<div class="flex gap-4">
+<button class="w-1/3 border border-primary text-primary font-label-md text-label-md py-4 rounded-lg active:bg-surface-variant transition-colors flex items-center justify-center" onclick="nextStep(1)">
+                        Atrás
+                    </button>
+<button class="w-2/3 bg-primary text-on-primary font-label-md text-label-md py-4 rounded-lg shadow-md active:scale-[0.98] transition-transform flex items-center justify-center gap-2" onclick="nextStep(3)">
+                        Continuar
+                    </button>
+</div>
+</section>
+<!-- STEP 3: Flight Tracking -->
+<section class="step-content flex-col gap-6" id="step-3">
+<div class="bg-surface-white rounded-xl border border-outline-variant/20 p-6 flex flex-col gap-6 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] relative overflow-hidden">
+<!-- Decorative background element for premium feel -->
+<div class="absolute -right-6 -top-6 w-32 h-32 bg-secondary-container rounded-full opacity-20 blur-2xl pointer-events-none"></div>
+<div class="flex flex-col gap-1 relative z-10">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-primary">Vuelo</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Monitoreamos su vuelo para ajustar la hora de recogida automáticamente.</p>
+</div>
+<div class="flex flex-col gap-1.5 relative z-10">
+<label class="font-label-sm text-label-sm text-on-surface-variant">Número de Vuelo <span class="text-error">*</span></label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-secondary text-[20px]">flight_land</span>
+<input class="w-full pl-10 pr-3 py-4 rounded-lg border border-outline-variant/50 bg-surface-container-low text-on-surface focus:border-secondary focus:bg-surface-white focus:ring-1 focus:ring-secondary transition-all outline-none font-body-lg font-semibold uppercase tracking-wider" placeholder="Ej. AA 1023" type="text"/>
+</div>
+<p class="font-label-sm text-label-sm text-outline mt-1 flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">info</span> Obligatorio para servicios de aeropuerto.</p>
+</div>
+</div>
+<div class="flex gap-4">
+<button class="w-1/3 border border-primary text-primary font-label-md text-label-md py-4 rounded-lg active:bg-surface-variant transition-colors flex items-center justify-center" onclick="nextStep(2)">
+                        Atrás
+                    </button>
+<button class="w-2/3 bg-primary text-on-primary font-label-md text-label-md py-4 rounded-lg shadow-md active:scale-[0.98] transition-transform flex items-center justify-center gap-2" onclick="nextStep(4)">
+                        Ver Resumen
+                    </button>
+</div>
+</section>
+<!-- STEP 4: Summary & Checkout -->
+<section class="step-content flex-col gap-6" id="step-4">
+<!-- Receipt Card -->
+<div class="bg-primary text-on-primary rounded-xl p-6 flex flex-col gap-4 shadow-xl relative overflow-hidden">
+<!-- Subtle pattern overlay -->
+<div class="absolute inset-0 opacity-5" style="background-image: radial-gradient(circle at 2px 2px, white 1px, transparent 0); background-size: 16px 16px;"></div>
+<div class="flex justify-between items-start relative z-10">
+<div>
+<h2 class="font-headline-md text-headline-md">Resumen</h2>
+<p class="font-label-sm text-label-sm text-outline-variant/80">Transferencia Ejecutiva</p>
+</div>
+<span class="material-symbols-outlined text-secondary text-[32px]">directions_car</span>
+</div>
+<div class="flex flex-col gap-3 mt-2 relative z-10 border-t border-outline-variant/20 pt-4">
+<div class="flex justify-between text-sm">
+<span class="font-label-sm text-label-sm text-inverse-primary">Ruta</span>
+<span class="font-label-md text-label-md text-right max-w-[150px] truncate" id="summary-route">Sector Valles</span>
+</div>
+<div class="flex justify-between text-sm">
+<span class="font-label-sm text-label-sm text-inverse-primary">Logística</span>
+<span class="font-label-md text-label-md">1 Pax, 0 Maletas</span>
+</div>
+<div class="flex justify-between items-center mt-2 border-t border-outline-variant/20 pt-4">
+<span class="font-label-md text-label-md text-inverse-primary">Total a Pagar</span>
+<span class="font-display-lg text-display-lg text-secondary" id="summary-price">$0.00</span>
+</div>
+</div>
+</div>
+<!-- Registration Form -->
+<div class="bg-surface-white rounded-xl border border-outline-variant/20 p-6 flex flex-col gap-5 shadow-sm mt-2">
+<h3 class="font-label-md text-label-md text-primary mb-1">Datos del Pasajero Principal</h3>
+<div class="flex flex-col gap-1.5">
+<label class="font-label-sm text-label-sm text-on-surface-variant">Nombre Completo</label>
+<input class="w-full px-3 py-3 rounded-lg border border-outline-variant/50 bg-surface-container-low text-on-surface focus:border-secondary focus:bg-surface-white focus:ring-1 focus:ring-secondary outline-none font-body-md" type="text"/>
+</div>
+<div class="flex flex-col gap-1.5">
+<label class="font-label-sm text-label-sm text-on-surface-variant">Teléfono (WhatsApp)</label>
+<div class="flex relative">
+<div class="absolute left-3 top-1/2 -translate-y-1/2 flex items-center gap-1 border-r border-outline-variant/50 pr-2">
+<span class="font-label-sm text-on-surface-variant">+593</span>
+</div>
+<input class="w-full pl-16 pr-3 py-3 rounded-lg border border-outline-variant/50 bg-surface-container-low text-on-surface focus:border-secondary focus:bg-surface-white focus:ring-1 focus:ring-secondary outline-none font-body-md" type="tel"/>
+</div>
+</div>
+<div class="flex flex-col gap-1.5">
+<label class="font-label-sm text-label-sm text-on-surface-variant">Correo Electrónico</label>
+<input class="w-full px-3 py-3 rounded-lg border border-outline-variant/50 bg-surface-container-low text-on-surface focus:border-secondary focus:bg-surface-white focus:ring-1 focus:ring-secondary outline-none font-body-md" type="email"/>
+</div>
+</div>
+<div class="flex gap-4 mt-2">
+<button class="w-1/4 border border-outline text-on-surface-variant font-label-md text-label-md py-4 rounded-lg active:bg-surface-variant transition-colors flex items-center justify-center" onclick="nextStep(3)">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<button class="w-3/4 bg-secondary text-on-secondary-container font-label-md text-label-md py-4 rounded-lg shadow-lg active:scale-[0.98] transition-transform flex items-center justify-center gap-2">
+                        Confirmar Reserva <span class="material-symbols-outlined text-[18px]">check_circle</span>
+</button>
+</div>
+</section>
+</main>
+</div>
+<script>
+        let currentStep = 1;
+        let pax = 1;
+        let bags = 0;
+
+        function updateCounter(type, change) {
+            if (type === 'pax') {
+                pax = Math.max(1, Math.min(4, pax + change));
+                document.getElementById('pax-count').innerText = pax;
+            } else if (type === 'bags') {
+                bags = Math.max(0, Math.min(3, bags + change));
+                document.getElementById('bags-count').innerText = bags;
+            }
+        }
+
+        function updateSummary() {
+            const sectorSelect = document.getElementById('sector-select');
+            const price = sectorSelect.value || "0";
+            const routeText = sectorSelect.options[sectorSelect.selectedIndex]?.text.split('(')[0] || "No seleccionado";
+            
+            document.getElementById('summary-price').innerText = `$${price}.00`;
+            document.getElementById('summary-route').innerText = routeText;
+            
+            // Update logistics text (simplified for demo)
+            const logText = document.querySelectorAll('#step-4 .flex.justify-between.text-sm')[1].children[1];
+            logText.innerText = `${pax} Pax, ${bags} Maleta${bags !== 1 ? 's' : ''}`;
+        }
+
+        function nextStep(step) {
+            // Hide all
+            document.querySelectorAll('.step-content').forEach(el => el.classList.remove('active'));
+            
+            // Show target
+            document.getElementById(`step-${step}`).classList.add('active');
+            
+            // Update Stepper Visuals
+            const nodes = document.querySelectorAll('.step-node');
+            nodes.forEach((node, index) => {
+                const circle = node.querySelector('div');
+                const text = node.querySelector('span');
+                
+                if (index + 1 === step) {
+                    // Active
+                    circle.className = 'w-8 h-8 rounded-full bg-primary text-on-primary flex items-center justify-center font-label-md text-label-md shadow-md ring-4 ring-surface transition-colors duration-300';
+                    text.className = 'font-label-sm text-label-sm text-primary font-semibold text-center leading-tight';
+                } else if (index + 1 < step) {
+                    // Completed
+                    circle.className = 'w-8 h-8 rounded-full bg-secondary text-on-secondary-container flex items-center justify-center font-label-md text-label-md ring-4 ring-surface transition-colors duration-300';
+                    circle.innerHTML = '<span class="material-symbols-outlined text-[16px]">check</span>';
+                    text.className = 'font-label-sm text-label-sm text-on-surface-variant text-center leading-tight';
+                } else {
+                    // Future
+                    circle.className = 'w-8 h-8 rounded-full bg-surface-variant text-on-surface-variant flex items-center justify-center font-label-md text-label-md ring-4 ring-surface transition-colors duration-300';
+                    circle.innerHTML = index + 1;
+                    text.className = 'font-label-sm text-label-sm text-outline-variant text-center leading-tight';
+                }
+            });
+
+            // Update Progress Line
+            const progressLine = document.getElementById('progress-line');
+            const percentages = {1: '0%', 2: '33%', 3: '66%', 4: '100%'};
+            progressLine.style.width = percentages[step];
+
+            // If going to step 4, update summary
+            if (step === 4) {
+                updateSummary();
+            }
+            
+            // Scroll to top of form area
+            document.querySelector('main').scrollTo({top: 0, behavior: 'smooth'});
+            currentStep = step;
+        }
+    </script>
+</body></html>

@@ -1,0 +1,127 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// Zonas de cobertura en Quito. El sector determina la tarifa (ver lib/pricing.ts).
+enum Sector {
+  NORTE
+  CENTRO
+  VALLES
+  SUR
+}
+
+// Sentido del traslado respecto al aeropuerto de Tababela.
+enum RideDirection {
+  AL_AEROPUERTO
+  DESDE_AEROPUERTO
+}
+
+// Ciclo de vida de un viaje.
+enum RideStatus {
+  PENDIENTE
+  ASIGNADO
+  EN_RUTA
+  COMPLETADO
+  CANCELADO
+}
+
+// Método de pago elegido por el cliente (el comprobante se confirma por WhatsApp).
+enum PaymentMethod {
+  TRANSFERENCIA
+  DEUNA
+  TARJETA
+  EFECTIVO
+}
+
+// Tipos de evento del historial de auditoría de un viaje.
+enum RideEventType {
+  CREADO
+  ASIGNADO
+  ESTADO
+  NOTA
+}
+
+// La única cuenta de la app: la administradora que gestiona la operación.
+// Los clientes nunca crean cuenta; reservan como invitados.
+model AdminUser {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  passwordHash String
+  fullName     String
+  createdAt    DateTime @default(now())
+
+  events RideEvent[]
+
+  @@map("admin_users")
+}
+
+// Conductor asignable a un viaje. Es un recurso que gestiona el admin; por
+// ahora no inicia sesión (no tiene cuenta propia).
+model Driver {
+  id        String   @id @default(cuid())
+  fullName  String
+  phone     String
+  vehicle   String?  // "Chevrolet Aveo gris"
+  plate     String?  // "PABC-1234"
+  active    Boolean  @default(true)
+  createdAt DateTime @default(now())
+
+  rides Ride[]
+
+  @@map("drivers")
+}
+
+// Una reserva de traslado. Los datos del cliente van inline (reserva invitado).
+model Ride {
+  id            String         @id @default(cuid())
+  // Cliente (invitado)
+  clientName    String
+  clientPhone   String // normalizado a E.164, ver lib/phone.ts
+  clientEmail   String?
+  // Detalle del viaje
+  scheduledAt   DateTime
+  direction     RideDirection  @default(AL_AEROPUERTO)
+  // La dirección exacta de recogida NO se pide en la reserva: se coordina por
+  // WhatsApp. El sector es suficiente para la tarifa y la operación.
+  sector        Sector
+  numPassengers Int // regla de negocio: 1..4
+  numBags       Int // regla de negocio: 0..3
+  flightNumber  String? // opcional
+  // Precio en USD (dólares enteros). SIEMPRE calculado en el backend según el
+  // sector — nunca se persiste un valor enviado por el cliente.
+  price         Int
+  paymentMethod PaymentMethod?
+  status        RideStatus     @default(PENDIENTE)
+  // Conductor asignado (null hasta que el admin lo asigna).
+  driverId      String?
+  driver        Driver?        @relation(fields: [driverId], references: [id])
+  notes         String?
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+
+  events RideEvent[]
+
+  @@index([scheduledAt])
+  @@index([status])
+  @@map("rides")
+}
+
+// Bitácora: cada creación, asignación, cambio de estado y nota queda aquí para
+// mostrar un historial por viaje en el panel admin.
+model RideEvent {
+  id          String        @id @default(cuid())
+  rideId      String
+  ride        Ride          @relation(fields: [rideId], references: [id])
+  type        RideEventType
+  detail      String?
+  createdById String?
+  createdBy   AdminUser?    @relation(fields: [createdById], references: [id])
+  createdAt   DateTime      @default(now())
+
+  @@map("ride_events")
+}
