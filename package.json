@@ -11,7 +11,8 @@
     "db:migrate": "prisma migrate dev",
     "db:generate": "prisma generate",
     "db:seed": "tsx prisma/seed.ts",
-    "admin:set": "tsx prisma/set-admin.ts"
+    "admin:set": "tsx prisma/set-admin.ts",
+    "admin:remove": "tsx prisma/remove-admin.ts"
   },
   "dependencies": {
     "@neondatabase/serverless": "^1.1.0",

@@ -5,11 +5,10 @@ import { neonConfig } from "@neondatabase/serverless";
 import bcrypt from "bcryptjs";
 import ws from "ws";
 
-// Cambia el correo y/o la contraseña de la administradora.
-//   npm run admin:set -- <correo> <contraseña> [nombre]
-// - Si ya existe un admin con ese correo, solo actualiza su contraseña.
-// - Si no, toma el admin existente (el de ejemplo) y lo renombra al nuevo
-//   correo con la nueva contraseña. Así queda un único admin con tus datos.
+// Crea o actualiza una administradora (se pueden tener varias).
+//   npm run admin:set -- <correo> <contraseña> ["Nombre"]
+// - Si el correo ya existe, actualiza su contraseña y nombre.
+// - Si no existe, crea un admin nuevo.
 
 neonConfig.webSocketConstructor = ws;
 const prisma = new PrismaClient({
@@ -19,7 +18,7 @@ const prisma = new PrismaClient({
 async function main() {
   const [emailArg, password, ...nameParts] = process.argv.slice(2);
   const email = (emailArg ?? "").trim().toLowerCase();
-  const fullName = nameParts.join(" ").trim() || "Administración AeroSwift";
+  const fullName = nameParts.join(" ").trim() || (email ? email.split("@")[0] : "");
 
   if (!email || !password) {
     console.error('Uso: npm run admin:set -- <correo> <contraseña> ["Nombre"]');
@@ -35,26 +34,15 @@ async function main() {
   }
 
   const passwordHash = await bcrypt.hash(password, 12);
+  await prisma.adminUser.upsert({
+    where: { email },
+    update: { passwordHash, fullName },
+    create: { email, passwordHash, fullName },
+  });
+  console.log(`✓ Admin listo: ${email}`);
 
-  const byEmail = await prisma.adminUser.findUnique({ where: { email } });
-  if (byEmail) {
-    await prisma.adminUser.update({ where: { id: byEmail.id }, data: { passwordHash, fullName } });
-    console.log(`✓ Contraseña actualizada para ${email}`);
-    return;
-  }
-
-  const current = await prisma.adminUser.findFirst({ orderBy: { createdAt: "asc" } });
-  if (current) {
-    await prisma.adminUser.update({
-      where: { id: current.id },
-      data: { email, passwordHash, fullName },
-    });
-    console.log(`✓ Admin actualizado: ${current.email} → ${email}`);
-  } else {
-    await prisma.adminUser.create({ data: { email, passwordHash, fullName } });
-    console.log(`✓ Admin creado: ${email}`);
-  }
-  console.log("Ya puedes iniciar sesión con las nuevas credenciales.");
+  const all = await prisma.adminUser.findMany({ orderBy: { createdAt: "asc" } });
+  console.log("Admins actuales:", all.map((a) => a.email).join(", "));
 }
 
 main()
