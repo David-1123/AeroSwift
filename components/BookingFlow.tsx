@@ -8,6 +8,7 @@ import {
   SECTOR_LABELS,
   DIRECTION_LABELS,
   PAYMENT_LABELS,
+  SELECTABLE_PAYMENT_METHODS,
   MAX_PASSENGERS,
   MAX_BAGS,
 } from "@/lib/rides";
@@ -398,7 +399,7 @@ function StepPayment({
     <div className="space-y-5">
       <PriceEstimate estimate={estimate} />
       <div className="space-y-3">
-        {(Object.keys(PAYMENT_LABELS) as PaymentMethod[]).map((m) => {
+        {SELECTABLE_PAYMENT_METHODS.map((m) => {
           const selected = form.paymentMethod === m;
           return (
             <div

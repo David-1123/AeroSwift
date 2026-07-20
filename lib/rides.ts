@@ -31,6 +31,14 @@ export const PAYMENT_LABELS: Record<PaymentMethod, string> = {
   EFECTIVO: "Efectivo presencial",
 };
 
+// Métodos de pago que se ofrecen al cliente en la reserva. TARJETA queda en el
+// modelo (por datos antiguos) pero ya no se ofrece.
+export const SELECTABLE_PAYMENT_METHODS: PaymentMethod[] = [
+  "TRANSFERENCIA",
+  "DEUNA",
+  "EFECTIVO",
+];
+
 export const STATUS_LABELS: Record<RideStatus, string> = {
   PENDIENTE: "Pendiente",
   ASIGNADO: "Asignado",
